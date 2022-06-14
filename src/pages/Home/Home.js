@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import useLocalStorage from 'hooks/useLocalStorage'
+import useSessionStorage from 'hooks/useSessionStorage'
 
 import Banner from 'components/Banner/Banner'
 import Categories from 'components/Categories/Categories'
@@ -7,7 +7,7 @@ import Modal from 'components/UI/Modal/Modal'
 
 function Home() {
     // doing first visit
-    const [firstVisit, setFirstVisit] = useLocalStorage('first visit', true)
+    const [firstVisit, setFirstVisit] = useSessionStorage('first visit', true)
 
     useEffect(() => {
         const beforeUnload = () => {
