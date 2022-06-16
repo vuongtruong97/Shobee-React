@@ -1,35 +1,24 @@
 import { userActions } from './userSlice'
 import { toast } from 'react-toastify'
 
-const url = 'https://shopeebe.herokuapp.com'
-// const url = 'http://localhost:3001'
+import { userAPI } from 'lib/api-axios'
+
+const baseURL = 'https://shopeebe.herokuapp.com'
+// const baseURL = 'http://localhost:3001'
 
 const userRegister = (data) => {
     return async (dispatch) => {
         try {
             dispatch(userActions.setNotification({ status: 'loading' }))
-            const response = await fetch(
-                'https://shopeebe.herokuapp.com/users/register',
-                {
-                    method: 'POST',
-                    body: JSON.stringify({ email: data.email, password: data.password }),
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                }
-            )
-            const result = await response.json()
-            if (!result.success) {
-                toast.error(result.message)
-            }
+            const { data: result } = await userAPI.register(data)
+
             if (result.success) {
                 dispatch(userActions.login(result.token))
                 dispatch(userActions.setNotification({ status: 'success' }))
                 localStorage.setItem('token', result.token)
-                toast.success('Đăng ký thành công!')
+                toast.success(result.message)
             }
         } catch (error) {
-            console.log(error)
             dispatch(
                 userActions.setNotification({ status: 'error', message: error.message })
             )
@@ -44,23 +33,9 @@ const userLogout = (token) => {
     console.log('logingout...')
     return async (dispatch) => {
         try {
-            const res = await fetch('https://shopeebe.herokuapp.com/users/logout', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${token}`,
-                },
-            })
-            if (res.status === 401) {
-                dispatch(userActions.logout())
-                localStorage.removeItem('token')
-            }
-            const result = await res.json()
+            const res = await userAPI.logout(token)
 
-            if (!result.success) {
-                throw new Error('Có lỗi xảy ra vui lòng thử lại sau !')
-            }
-            if (result.success) {
+            if (res.data.success) {
                 localStorage.removeItem('token')
                 dispatch(userActions.logout())
             }
@@ -75,28 +50,15 @@ const userLogin = (data) => {
     return async (dispatch) => {
         dispatch(userActions.setNotification({ status: 'loading' }))
         try {
-            const res = await fetch(`${url}/users/login`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data),
-            })
-
-            const result = await res.json()
-            console.log(result)
+            const { data: result } = await userAPI.login(data)
 
             if (result.success === false) {
-                throw new Error(
-                    'Đăng nhập không thành công vui lòng kiểm tra lại thông tin'
-                )
+                throw new Error(result.message)
             }
             dispatch(userActions.login(result.token))
             dispatch(userActions.setNotification({ status: 'success' }))
             localStorage.setItem('token', result.token)
-            toast.success('Đăng nhập thành công!')
-
-            console.log(result)
+            toast.success(result.message)
         } catch (error) {
             console.log(error)
             toast.error(error.message)
@@ -108,8 +70,8 @@ const userLogin = (data) => {
 const googleLogin = () => {
     return async (dispatch) => {
         try {
-            window.open(`${url}/oauth/google`)
-            // const res = await fetch(`${url}/users/login`)
+            window.open(`${baseURL}/oauth/google`)
+            // const res = await fetch(`${baseURL}/users/login`)
 
             // console.log(res)
 

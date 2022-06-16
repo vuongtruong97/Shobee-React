@@ -4,6 +4,8 @@ import CategorySliderItem from './CategorySliderItem'
 import { CateNextArr, CatePrevArrow } from 'components/UI/Slider/CategoriesArrow'
 import useSessionStorage from 'hooks/useSessionStorage'
 
+import { uiAPI } from 'lib/api-axios'
+
 import SmallSpinner from 'components/UI/LoadingSpinner/SmallSpinner'
 
 function CategoriesSlider() {
@@ -15,28 +17,7 @@ function CategoriesSlider() {
         try {
             const fetchData = async () => {
                 setIsLoading(true)
-                const res = await fetch(
-                    'https://shopeebe.herokuapp.com/categories/list-category',
-                    {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({
-                            filter: {
-                                id: 1,
-                            },
-                            sort: {
-                                createdAt: 1,
-                            },
-                            paging: {
-                                start: 0,
-                                limit: 30,
-                            },
-                        }),
-                    }
-                )
-                const data = await res.json()
+                const { data } = await uiAPI.getCategories()
                 setSliders(data.data)
                 setIsLoading(false)
             }
@@ -46,7 +27,7 @@ function CategoriesSlider() {
         } catch (error) {
             console.log(error)
         }
-    }, [sliders])
+    }, [sliders, setSliders])
     const settings = {
         infinite: false,
         slidesToShow: 10,

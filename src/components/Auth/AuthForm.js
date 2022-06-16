@@ -21,6 +21,7 @@ function AuthForm() {
     const { pathname } = useLocation()
     const navigate = useNavigate()
     const dispatch = useDispatch()
+
     const isLoading = status === 'loading'
     const isRegisterForm = pathname === '/auth/register'
     const formName = isRegisterForm ? 'Đăng ký' : 'Đăng nhập'
@@ -55,9 +56,7 @@ function AuthForm() {
         pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,
     }
     const nameValidate = {
-        required: 'Vui lòng nhập tên của bạn',
-        minLength: 1,
-        maxLength: 80,
+        maxLength: 20,
     }
 
     const socialLogin = () => {
@@ -83,11 +82,16 @@ function AuthForm() {
                     <div className={styles['form-input']}>
                         <Input
                             placeholder='First Name'
-                            {...register('firstName', nameValidate)}
+                            {...register('firstname', nameValidate)}
                         />
-                        {errors.firstName && (
+                        {errors.firstname && (
                             <p className={styles['error-message']}>
-                                {errors.firstName.message}
+                                {errors.firstname.message}
+                            </p>
+                        )}
+                        {errors.firstname?.type === 'maxLength' && (
+                            <p className={styles['error-message']}>
+                                Tên không dài quá 20 ký tự
                             </p>
                         )}
                     </div>
@@ -96,11 +100,11 @@ function AuthForm() {
                     <div className={styles['form-input']}>
                         <Input
                             placeholder='Last Name'
-                            {...register('lastName', nameValidate)}
+                            {...register('lastname', nameValidate)}
                         />
-                        {errors.lastName && (
+                        {errors.lastname && (
                             <p className={styles['error-message']}>
-                                {errors.lastName.message}
+                                {errors.lastname.message}
                             </p>
                         )}
                     </div>
@@ -161,7 +165,7 @@ function AuthForm() {
                 )}
                 {!isRegisterForm && (
                     <p>
-                        Bạn đã có tài khoản &nbsp;
+                        Bạn chưa có tài khoản &nbsp;
                         <Link to='/auth/register'>Đăng ký</Link>
                     </p>
                 )}

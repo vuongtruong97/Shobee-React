@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import classes from './Header.module.scss'
 import classNames from 'classnames/bind'
 

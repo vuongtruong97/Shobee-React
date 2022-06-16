@@ -12,9 +12,9 @@ function HeaderSearch() {
     return (
         <div className={cx('search')}>
             <MobileNav />
-            <Link to='/' className={cx('logo')}>
+            <Link to='/home' className={cx('logo')}>
                 <FaShopify />
-                <span>Shoppe</span>
+                <span>Shobee</span>
             </Link>
             <div className={cx('control')}>
                 <div className={cx('form-search')}>

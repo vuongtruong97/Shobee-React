@@ -13,7 +13,6 @@ const uiSlice = createSlice({
     reducers: {
         setIsDarkMode(state, action) {
             state.isDarkMode = action.payload
-            // localStorage.setItem('isDarkMode', action.payload)
         },
         setFirstLoad(state, action) {
             state.firstLoad = action.payload

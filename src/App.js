@@ -14,7 +14,9 @@ const Dashboard = React.lazy(() => import('./pages/Dashboard/Dashboard'))
 const Blog = React.lazy(() => import('./pages/Blog/Blog'))
 const Home = React.lazy(() => import('./pages/Home/Home'))
 const User = React.lazy(() => import('./pages/User/User'))
+const Category = React.lazy(() => import('./pages/Category/Category'))
 
+const RegisterShop = React.lazy(() => import('./pages/Shop/RegisterShop'))
 const AuthPage = React.lazy(() => import('./pages/Auth/AuthPage'))
 
 const Welcome = React.lazy(() => import('./pages/Welcome/Welcome'))
@@ -33,9 +35,16 @@ function App() {
 
                     <Route path='/' element={<MainLayout />}>
                         <Route index path='/' element={<Navigate replace to='/home' />} />
+                        <Route path=':category' element={<Category />} />
                         <Route path='home' element={<Home />} />
                         <Route path='products' element={<Products />} />
                         <Route path='blog' element={<Blog />} />
+
+                        <Route path='shop'>
+                            <Route path='' element={<Blog />} />
+                            <Route path='register' element={<RegisterShop />} />
+                        </Route>
+
                         <Route
                             path='user'
                             element={

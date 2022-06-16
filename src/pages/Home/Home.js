@@ -4,6 +4,7 @@ import useSessionStorage from 'hooks/useSessionStorage'
 import Banner from 'components/Banner/Banner'
 import Categories from 'components/Categories/Categories'
 import Modal from 'components/UI/Modal/Modal'
+import HomePopUp from 'components/HomePopUp/HomePopUp'
 
 function Home() {
     // doing first visit
@@ -13,7 +14,6 @@ function Home() {
         const beforeUnload = () => {
             setFirstVisit(false)
         }
-        console.log('run')
         window.addEventListener('beforeunload', beforeUnload)
         document.title = 'Shoppe React'
 
@@ -22,15 +22,16 @@ function Home() {
         }
     }, [setFirstVisit])
 
+    const handleFirstVisit = () => {
+        console.log('run run')
+        setFirstVisit(false)
+    }
+
     return (
         <div className='container'>
+            {firstVisit && <HomePopUp onHide={handleFirstVisit} />}
             <Banner />
             <Categories />
-            {firstVisit && (
-                <Modal>
-                    <h1>Hello</h1>
-                </Modal>
-            )}
         </div>
     )
 }

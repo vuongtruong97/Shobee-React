@@ -4,11 +4,32 @@ import BannerSlider from 'components/Sliders/BannerSlider'
 
 import styles from './Banner.module.scss'
 
+const DUMMY_SLIDER = [
+    {
+        id: 12,
+        img_url: 'https://cf.shopee.vn/file/3a2dd7df04d32eafe2d8ae679287fe76_xxhdpi',
+        alt: 'sale_6-6',
+        target_url: '',
+    },
+    {
+        id: 22,
+        img_url: 'https://cf.shopee.vn/file/89e583b205e1069860ee7150f4a5bf97_xxhdpi',
+        alt: 'sale_6-6',
+        target_url: '',
+    },
+    {
+        id: 32,
+        img_url: 'https://cf.shopee.vn/file/1653a7e2377de0049716f655a71acb4b_xxhdpi',
+        alt: 'sale_6-6',
+        target_url: '',
+    },
+]
+
 function Banner() {
     return (
         <div className='row'>
             <div className='col col-12 md-12 lg-8'>
-                <BannerSlider />
+                <BannerSlider sliders={DUMMY_SLIDER} />
             </div>
             <div className='col col-0 md-0 lg-4'>
                 <div className={styles['sub-banner']}>

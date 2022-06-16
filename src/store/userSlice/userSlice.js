@@ -5,13 +5,7 @@ const persistedToken = localStorage.getItem('token')
 const initialState = {
     token: persistedToken,
     fetched: false,
-    info: {
-        firstName: '',
-        lastName: '',
-        email: '',
-        avatarUrl: '',
-        permission: '',
-    },
+    info: {},
     isLoggedIn: !!persistedToken,
     notification: {},
 }
@@ -21,7 +15,11 @@ const userSlice = createSlice({
     initialState: initialState,
     reducers: {
         setNotification(state, action) {
-            state.notification = { status: action.payload.status, error: action.payload.error, message: action.payload.message }
+            state.notification = {
+                status: action.payload.status,
+                error: action.payload.error,
+                message: action.payload.message,
+            }
         },
         setIsLoading(state, action) {
             state.isLoading = action.payload
@@ -33,6 +31,9 @@ const userSlice = createSlice({
         logout(state) {
             state.token = undefined
             state.isLoggedIn = false
+        },
+        setUserInfo(state, action) {
+            state.info = action.payload
         },
     },
 })
