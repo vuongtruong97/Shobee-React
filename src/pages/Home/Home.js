@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import useSessionStorage from 'hooks/useSessionStorage'
 
-import Banner from 'components/Banner/Banner'
-import Categories from 'components/Categories/Categories'
-import Modal from 'components/UI/Modal/Modal'
-import HomePopUp from 'components/HomePopUp/HomePopUp'
+import Banner from 'pages/Home/components/Banner/Banner'
+import Categories from 'pages/Home/components/Categories/Categories'
+import HomePopUp from 'pages/Home/components/HomePopUp/HomePopUp'
 
 function Home() {
     // doing first visit

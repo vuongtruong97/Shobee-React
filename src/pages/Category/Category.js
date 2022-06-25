@@ -1,8 +1,8 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
 
-import BannerSlider from 'components/Sliders/BannerSlider'
-import ListProducts from 'components/ListProducts/ListProducts'
+import BannerSlider from 'common-components/Slider/BannerSlider'
+import ListProducts from 'common-components/ListProducts/ListProducts'
 
 const DUMMY_SLIDER = [
     {

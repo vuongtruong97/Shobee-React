@@ -1,10 +1,8 @@
 import { userActions } from './userSlice'
 import { toast } from 'react-toastify'
+import { TOKEN } from 'constants/browserStorage-constants'
 
-import { userAPI } from 'lib/api-axios'
-
-const baseURL = 'https://shopeebe.herokuapp.com'
-// const baseURL = 'http://localhost:3001'
+import userAPI from 'services/user-api/user-api'
 
 const userRegister = (data) => {
     return async (dispatch) => {
@@ -15,7 +13,7 @@ const userRegister = (data) => {
             if (result.success) {
                 dispatch(userActions.login(result.token))
                 dispatch(userActions.setNotification({ status: 'success' }))
-                localStorage.setItem('token', result.token)
+                localStorage.setItem(TOKEN, result.token)
                 toast.success(result.message)
             }
         } catch (error) {
@@ -29,14 +27,14 @@ const userRegister = (data) => {
     }
 }
 
-const userLogout = (token) => {
+const userLogout = () => {
     console.log('logingout...')
     return async (dispatch) => {
         try {
-            const res = await userAPI.logout(token)
+            const res = await userAPI.logout()
 
             if (res.data.success) {
-                localStorage.removeItem('token')
+                localStorage.removeItem(TOKEN)
                 dispatch(userActions.logout())
             }
         } catch (error) {
@@ -57,7 +55,7 @@ const userLogin = (data) => {
             }
             dispatch(userActions.login(result.token))
             dispatch(userActions.setNotification({ status: 'success' }))
-            localStorage.setItem('token', result.token)
+            localStorage.setItem(TOKEN, result.token)
             toast.success(result.message)
         } catch (error) {
             console.log(error)
@@ -70,13 +68,10 @@ const userLogin = (data) => {
 const googleLogin = () => {
     return async (dispatch) => {
         try {
-            window.open(`${baseURL}/oauth/google`)
+            // window.open(`${baseURL}/oauth/google`)
             // const res = await fetch(`${baseURL}/users/login`)
-
             // console.log(res)
-
             // const result = await res.json()
-
             // console.log(result)
         } catch (error) {
             console.log(error)

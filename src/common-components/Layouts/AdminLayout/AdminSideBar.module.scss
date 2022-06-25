@@ -1,0 +1,23 @@
+.sideBar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 22rem;
+    padding: 7rem 1rem 0;
+    margin-top: 8rem;
+    border-top-right-radius: 5rem;
+    background-color: #e3e3e3;
+    box-shadow: 0.3rem 0.3rem 0.6rem #c9c9c9, -0.2rem -0.2rem 0.5rem #fff;
+    & > * {
+        margin-bottom: 2rem;
+        display: block;
+    }
+    .sideOption {
+        padding: 0 1rem;
+        transition: linear 0.25s;
+        &:hover {
+            transform: translateX(0.5rem);
+        }
+    }
+}

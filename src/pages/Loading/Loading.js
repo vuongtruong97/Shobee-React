@@ -1,6 +1,6 @@
 import React from 'react'
 
-import LoadingSpinner from 'components/UI/LoadingSpinner/LoadingSpinner'
+import LoadingSpinner from 'common-components/UI/LoadingSpinner/LoadingSpinner'
 
 function Loading() {
     return (

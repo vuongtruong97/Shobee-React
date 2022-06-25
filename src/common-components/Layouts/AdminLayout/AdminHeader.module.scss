@@ -1,0 +1,61 @@
+$header_height: 6rem;
+.header {
+    position: fixed;
+    inset: 0 0 auto 0;
+    z-index: 9998;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: $header_height;
+    padding: 0 2rem;
+    background-color: #e5e2e2;
+    box-shadow: 0.3rem 0.3rem 0.6rem #c9c9c9, -0.2rem -0.2rem 0.5rem #fff;
+
+    .logo {
+        .logoname {
+            color: #fff;
+            font-size: 1.6rem;
+            font-weight: 500;
+            svg {
+                font-size: 2.5rem;
+            }
+        }
+    }
+    .actions {
+        display: flex;
+        align-items: center;
+        & > * {
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: calc($header_height - 2rem);
+            padding: 0 0.6rem;
+            border-radius: 999px;
+            min-width: calc($header_height - 2rem);
+            font-size: 1.7rem;
+            margin-right: 1rem;
+            box-shadow: 0.3rem 0.3rem 0.6rem #c9c9c9, -0.2rem -0.2rem 0.5rem #fff;
+            font-weight: 500;
+
+            &:hover {
+                box-shadow: #c9c9c9 3px 3px 6px 0px inset,
+                    #ffffff80 -3px -3px 6px 1px inset;
+            }
+        }
+
+        .user {
+            .userAvatar {
+                width: 3rem;
+                height: 3rem;
+                background-position: center;
+                background-size: cover;
+                border-radius: 999px;
+                margin-right: 0.5rem;
+            }
+            .userName {
+                font-size: 1.5rem;
+            }
+        }
+    }
+}

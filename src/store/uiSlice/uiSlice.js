@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { IS_DARK_MODE } from 'constants/browserStorage-constants'
 
-const persistedIsDarkMode = localStorage.getItem('isDarkMode')
+const persistedIsDarkMode = localStorage.getItem(IS_DARK_MODE)
 
 const initialState = {
     isDarkMode: persistedIsDarkMode === 'true' ? true : false,

@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
-
-const persistedToken = localStorage.getItem('token')
+import { TOKEN } from 'constants/browserStorage-constants'
+const persistedToken = localStorage.getItem(TOKEN)
 
 const initialState = {
     token: persistedToken,
