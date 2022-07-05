@@ -77,22 +77,20 @@
         justify-content: center;
         align-items: center;
         cursor: pointer;
-        :hover {
-            opacity: 0.8;
-        }
+
         .cart-amount {
             display: flex;
             align-items: center;
             justify-content: center;
             position: absolute;
-            padding: 0 3px;
+            padding: 0 6px;
             background-color: rgb(255, 255, 255);
             border-radius: 1rem;
             border: 2px solid var(--primary);
             height: 20px;
             bottom: 60%;
             left: 50%;
-            font-size: 1rem;
+            font-size: 1.1rem;
             font-weight: 500;
             color: var(--primary);
         }

@@ -5,8 +5,8 @@ import queryString from 'query-string'
 import { TOKEN } from 'constants/browserStorage-constants'
 
 const axiosClient = axios.create({
-    baseURL: 'http://localhost:3001',
-    // baseURL: process.env.REACT_APP_BASE_URL,
+    //baseURL: 'http://localhost:3001', //http://171.238.79.206:3000/home
+    baseURL: process.env.REACT_APP_BASE_URL,
     withCredentials: false,
     headers: {
         // 'content-type': 'application/json',

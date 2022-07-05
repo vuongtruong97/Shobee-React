@@ -5,23 +5,23 @@ import styles from './ListProducts.module.scss'
 import ProductItem from './ProductItem'
 import SortBar from './SortBar'
 
-function ListProducts() {
+import SmallSpinner from 'common-components/UI/LoadingSpinner/SmallSpinner'
+
+function ListProducts({ listProducts, onFilter, onLoad, ...props }) {
     return (
         <div className={styles.ListProducts}>
-            <SortBar />
-            <div className='row'>
-                <ProductItem />
-                <ProductItem />
-                <ProductItem />
-                <ProductItem />
-                <ProductItem />
-                <ProductItem />
-                <ProductItem />
-                <ProductItem />
-                <ProductItem />
-                <ProductItem />
-                <ProductItem />
-            </div>
+            {onLoad && <SmallSpinner />}
+
+            {!onLoad && (
+                <>
+                    <SortBar onFilter={onFilter} />
+                    <div className='row'>
+                        {listProducts.map((prod) => (
+                            <ProductItem key={prod._id} data={prod} />
+                        ))}
+                    </div>
+                </>
+            )}
         </div>
     )
 }

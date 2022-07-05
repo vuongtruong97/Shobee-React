@@ -4,7 +4,7 @@
     min-height: 5rem;
     color: #000;
     top: calc(100% + 0.5rem);
-    box-shadow: 4px 4px 6px 0 rgb(0 0 0 / 26%);
+    box-shadow: 1px 1px 6px 0 rgb(0 0 0 / 26%);
     &:before {
         content: '';
         position: absolute;
@@ -34,37 +34,12 @@
         border-radius: 0.3rem;
         overflow: hidden;
     }
-    // &.show {
-    //     animation: fadeIn ease-in-out 0.15s forwards;
-    // }
-    // &.hidden {
-    //     animation: fadeOut ease-in-out 0.15s forwards;
-    // }
+    &.right {
+        right: 0;
+        &::before {
+            right: 0;
+            left: auto;
+            top: -26px;
+        }
+    }
 }
-
-// @keyframes fadeIn {
-//     0% {
-//         transform-origin: top center;
-//         opacity: 0;
-//         transform: scale(0.4);
-//     }
-//     100% {
-//         transform-origin: top center;
-
-//         opacity: 1;
-//         transform: scale(1);
-//     }
-// }
-
-// @keyframes fadeOut {
-//     0% {
-//         transform-origin: top center;
-//         opacity: 1;
-//         transform: scale(1);
-//     }
-//     100% {
-//         opacity: 0;
-//         transform-origin: top center;
-//         transform: scale(0);
-//     }
-// }

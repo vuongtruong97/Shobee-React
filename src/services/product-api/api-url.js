@@ -3,6 +3,8 @@ const PRODUCT_API = Object.freeze({
     GET_PRODUCT: '/products/:id',
     UPDATE_PRODUCT: '/products/:id',
     DELETE_PRODUCT: '/products/:id',
+    GET_LIST: 'products/list',
+    GET_LIST_OF_CATE:'/'
 })
 
 export default PRODUCT_API

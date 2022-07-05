@@ -2,7 +2,9 @@ import React, { Suspense, useEffect } from 'react'
 import { Routes, Route, Navigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import userAPI from 'services/user-api/user-api'
+import cartAPI from 'services/cart-api/cart-api'
 import { userActions } from 'store/userSlice/userSlice'
+import { uiActions } from 'store/uiSlice/uiSlice'
 import RequireAuth from 'common-components/RequireAuth/RequireAuth'
 
 import ToastContainer from 'common-components/UI/Toast/Toast'
@@ -16,7 +18,7 @@ const AdminLayout = React.lazy(() =>
     import('common-components/Layouts/AdminLayout/AdminLayout')
 )
 
-const Products = React.lazy(() => import('./pages/Products/Products'))
+const Product = React.lazy(() => import('./pages/Product/Product'))
 const Dashboard = React.lazy(() => import('./pages/Dashboard/Dashboard'))
 const Blog = React.lazy(() => import('./pages/Blog/Blog'))
 const Home = React.lazy(() => import('./pages/Home/Home'))
@@ -25,7 +27,7 @@ const Category = React.lazy(() => import('./pages/Category/Category'))
 
 const RegisterShop = React.lazy(() => import('./pages/Shop/RegisterShop'))
 const ShopAnalystics = React.lazy(() =>
-    import('./pages/Shop/ShopAnalystics/ShopAnalytics')
+    import('./pages/Shop/ShopAnalystics/ShopAnalystics')
 )
 const ManageProducts = React.lazy(() =>
     import('./pages/Shop/ManageProducts/ManageProducts')
@@ -46,6 +48,10 @@ function App() {
             userAPI
                 .getUserInfo()
                 .then((res) => dispatch(userActions.setUserInfo(res.data.data)))
+
+            cartAPI
+                .getCartList()
+                .then((res) => dispatch(userActions.setCartInfo(res.data)))
         }
     }, [isLoggedIn, dispatch])
 
@@ -58,12 +64,14 @@ function App() {
                     </Route>
 
                     <Route path='/' element={<MainLayout />}>
-                        <Route index element={<Navigate replace to='/home' />} />
+                        <Route index element={<Home />} />
                         <Route path='/category/:category' element={<Category />} />
-                        <Route path='home' element={<Home />} />
-                        <Route path='products' element={<Products />} />
+                        <Route path='product/:id' element={<Product />} />
                         <Route path='blog' element={<Blog />} />
-                        <Route path='shop/register' element={<RegisterShop />} />
+
+                        <Route element={<RequireAuth />}>
+                            <Route path='shop/register' element={<RegisterShop />} />
+                        </Route>
 
                         <Route element={<RequireAuth />}>
                             <Route path='user' element={<User />}>

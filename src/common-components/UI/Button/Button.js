@@ -17,6 +17,7 @@ function Button(
         fullwidth,
         social,
         rounded,
+        secondary,
         ...props
     },
     ref
@@ -31,6 +32,7 @@ function Button(
         primary,
         social,
         rounded,
+        secondary,
     })
     return (
         <button disabled={disabled} className={classes} {...props} ref={ref}>

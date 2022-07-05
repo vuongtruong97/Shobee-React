@@ -17,7 +17,7 @@ const transitionStyles = {
     exited: { opacity: 0 },
 }
 
-function SortBar() {
+function SortBar({ onFilter }) {
     const [showPriceOptions, setShowPriceOptions] = useState(false)
 
     const handleShowPriceFilter = () => {
@@ -26,13 +26,38 @@ function SortBar() {
     const handleHidePriceFilter = () => {
         setShowPriceOptions(false)
     }
+
+    const handleSetFilter = (value) => {
+        onFilter(value)
+    }
     return (
         <div className={styles.sortBar}>
             <span className={styles.label}>Sắp xếp theo</span>
             <div className={styles.sortOptions}>
-                <div className={styles.option}>Phổ biến</div>
-                <div className={styles.option}>Bán chạy</div>
-                <div className={styles.option}>Mới nhất</div>
+                <div
+                    onClick={() => {
+                        onFilter({ sort: 'pop' })
+                    }}
+                    className={styles.option}
+                >
+                    Phổ biến
+                </div>
+                <div
+                    onClick={() => {
+                        onFilter({ sort: 'sold' })
+                    }}
+                    className={styles.option}
+                >
+                    Bán chạy
+                </div>
+                <div
+                    onClick={() => {
+                        onFilter({ sort: '-_id' })
+                    }}
+                    className={styles.option}
+                >
+                    Mới nhất
+                </div>
                 <div
                     onMouseEnter={handleShowPriceFilter}
                     onMouseLeave={handleHidePriceFilter}
@@ -57,8 +82,22 @@ function SortBar() {
                                 }}
                                 className={styles.list}
                             >
-                                <div className={styles.priceOption}>giá thấp đến cao</div>
-                                <div className={styles.priceOption}>giá thấp đến cao</div>
+                                <div
+                                    onClick={() => {
+                                        onFilter({ sort: 'price' })
+                                    }}
+                                    className={styles.priceOption}
+                                >
+                                    giá thấp đến cao
+                                </div>
+                                <div
+                                    onClick={() => {
+                                        onFilter({ sort: '-price' })
+                                    }}
+                                    className={styles.priceOption}
+                                >
+                                    giá cao đến thấp
+                                </div>
                             </div>
                         )}
                     </Transition>

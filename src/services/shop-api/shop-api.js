@@ -24,6 +24,10 @@ const shopAPI = {
             url: SHOP_API.MY_SHOP_PROD,
         })
     },
+    getShopInfo(id) {
+        const url = SHOP_API.GET_SHOP_INFO.replace(':id', id)
+        return axiosClient.get(url)
+    },
 }
 
 export default shopAPI

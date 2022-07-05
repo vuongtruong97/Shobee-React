@@ -1,13 +1,25 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import useSessionStorage from 'hooks/useSessionStorage'
 
 import Banner from 'pages/Home/components/Banner/Banner'
 import Categories from 'pages/Home/components/Categories/Categories'
 import HomePopUp from 'pages/Home/components/HomePopUp/HomePopUp'
+import ListProducts from 'common-components/ListProducts/ListProducts'
+import productAPI from 'services/product-api/product-api'
 
 function Home() {
     // doing first visit
     const [firstVisit, setFirstVisit] = useSessionStorage('first visit', true)
+    const [listProducts, setListProducts] = React.useState([])
+    const [isLoading, setIsloading] = React.useState(false)
+
+    const [params, setParams] = useState({
+        limit: 30,
+    })
+
+    const handleSetParams = (config) => {
+        setParams({ ...params, ...config })
+    }
 
     useEffect(() => {
         const beforeUnload = () => {
@@ -21,6 +33,24 @@ function Home() {
         }
     }, [setFirstVisit])
 
+    useEffect(() => {
+        try {
+            const getListProd = async () => {
+                setIsloading(true)
+                console.log(params)
+                const res = await productAPI.getListProd(params)
+
+                setListProducts(res.data.data)
+                setIsloading(false)
+
+                console.log(res)
+            }
+            getListProd()
+        } catch (error) {
+            console.log(error)
+        }
+    }, [params])
+
     const handleFirstVisit = () => {
         console.log('run run')
         setFirstVisit(false)
@@ -31,6 +61,12 @@ function Home() {
             {firstVisit && <HomePopUp onHide={handleFirstVisit} />}
             <Banner />
             <Categories />
+
+            <ListProducts
+                onFilter={handleSetParams}
+                onLoad={isLoading}
+                listProducts={listProducts}
+            />
         </div>
     )
 }

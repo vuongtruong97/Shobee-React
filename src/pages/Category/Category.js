@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
 import BannerSlider from 'common-components/Slider/BannerSlider'
 import ListProducts from 'common-components/ListProducts/ListProducts'
+
+import categoryApi from 'services/category-api/category-api'
 
 const DUMMY_SLIDER = [
     {
@@ -27,7 +29,30 @@ const DUMMY_SLIDER = [
 
 function Category() {
     const { category } = useParams()
-    console.log(category)
+    const [listProds, setListProds] = useState([])
+    const [params, setParams] = useState({
+        limit: 30,
+    })
+
+    const handleSetParams = (config) => {
+        setParams({ ...params, ...config })
+    }
+
+    useEffect(() => {
+        try {
+            const fetch = async () => {
+                const res = await categoryApi.getProdOfCate(category, params)
+
+                setListProds(res.data.data)
+
+                console.log(res)
+            }
+
+            fetch()
+        } catch (error) {
+            console.log(error)
+        }
+    }, [category, params])
 
     return (
         <div className='container'>
@@ -37,7 +62,7 @@ function Category() {
                     <h1>{category}</h1>
                 </div>
                 <div className='col col-12 sm-12 md-10 lg-10 xl-10'>
-                    <ListProducts />
+                    <ListProducts onFilter={handleSetParams} listProducts={listProds} />
                 </div>
             </div>
         </div>

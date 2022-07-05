@@ -23,7 +23,11 @@
     &.primary {
         background-color: var(--primary);
     }
-
+    &.secondary {
+        border: 1px solid var(--primary);
+        color: var(--primary);
+        background-color: #fff;
+    }
     &.success {
         background-color: var(--secondary-green);
     }
@@ -41,6 +45,7 @@
         border: 1px solid rgb(121, 121, 121);
         color: var(--text-primary);
     }
+
     &.disabled {
         opacity: 0.6;
         cursor: not-allowed;

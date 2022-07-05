@@ -1,6 +1,9 @@
 import React from 'react'
 import { Transition } from 'react-transition-group'
 import styles from './PopOver.module.scss'
+import classNames from 'classnames/bind'
+
+const cx = classNames.bind(styles)
 
 const duration = 150
 
@@ -15,13 +18,13 @@ const transitionStyles = {
     exited: { opacity: 0, transform: 'scale(0)' },
 }
 
-function PopOver({ children = 'Pop Over', show, ...props }) {
+function PopOver({ children = 'Pop Over', right, show, ...props }) {
     return (
         <Transition mountOnEnter={true} unmountOnExit={true} in={show} timeout={duration}>
             {(state) => (
                 <div
                     style={{ ...defaultStyle, ...transitionStyles[state] }}
-                    className={styles.popover}
+                    className={cx('popover', { right: right })}
                 >
                     <div className={styles.content}>{children}</div>
                 </div>

@@ -49,7 +49,6 @@ function AddProductForm({ onSuccess }) {
         const fd = appendFormData(data)
 
         try {
-            console.log(data)
             const result = await toastPromise(
                 productAPI.createProduct(fd),
                 'Đang tạo sản phẩm 🚗 🚓 🚕 '

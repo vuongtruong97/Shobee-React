@@ -46,6 +46,7 @@
                 top: calc(100% + 2px);
                 border-radius: 2px;
                 overflow: hidden;
+                z-index: 999;
                 &::before {
                     content: '';
                     position: absolute;

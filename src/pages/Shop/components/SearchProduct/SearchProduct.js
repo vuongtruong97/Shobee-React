@@ -3,7 +3,7 @@ import styles from './SearchProduct.module.scss'
 
 import NeuButton from 'common-components/UI/Button/NeuButton'
 import Modal from 'common-components/UI/Modal/Modal'
-import AddProductForm from '../AddProductForm/AddProductForm'
+import AddProductForm from '../ActionProductForm/AddProductForm'
 
 import DivStyle1 from 'common-components/UI/Div/DivStyle1'
 

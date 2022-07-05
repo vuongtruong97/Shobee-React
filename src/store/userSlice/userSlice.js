@@ -8,6 +8,7 @@ const initialState = {
     info: {},
     isLoggedIn: !!persistedToken,
     notification: {},
+    cart: [],
 }
 
 const userSlice = createSlice({
@@ -34,6 +35,9 @@ const userSlice = createSlice({
         },
         setUserInfo(state, action) {
             state.info = action.payload
+        },
+        setCartInfo(state, action) {
+            state.cart = action.payload
         },
     },
 })

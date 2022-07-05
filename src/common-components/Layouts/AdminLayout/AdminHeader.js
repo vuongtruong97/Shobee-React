@@ -11,7 +11,7 @@ function AdminHeader() {
 
     return (
         <div className={styles.header}>
-            <Link className={styles.logo} to='/home'>
+            <Link className={styles.logo} to='/'>
                 <NeuButton primary>Home</NeuButton>
             </Link>
             <div className={styles.actions}>

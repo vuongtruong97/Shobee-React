@@ -20,6 +20,10 @@ const categoryApi = {
             }),
         })
     },
+    getProdOfCate(slug, params) {
+        const url = CATE_API.GET_PROD_OF_CATE.replace(':slug', slug)
+        return axiosClient.get(url, { params: params })
+    },
 }
 
 export default categoryApi

@@ -59,6 +59,21 @@
                         background-position: center;
                         margin: 0 auto;
                     }
+                    .action {
+                        font-size: 1.6rem;
+                        cursor: pointer;
+                        display: inline-block;
+                        &:hover {
+                            opacity: 0.8;
+                        }
+                    }
+                    .delete {
+                        color: var(--error);
+                    }
+                    .edit {
+                        color: var(--success);
+                        margin-right: 1rem;
+                    }
                 }
             }
         }

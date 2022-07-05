@@ -14,6 +14,12 @@ function AdminSideBar() {
     }
     return (
         <div className={styles.sideBar}>
+            <Link to='' className={styles.sideOption}>
+                <NeuButton style={buttonStyle} rounded fullwidth>
+                    <TbChartLine />
+                    &nbsp;&nbsp;Số liệu
+                </NeuButton>
+            </Link>
             <Link to='delivery' className={styles.sideOption}>
                 <NeuButton style={buttonStyle} rounded fullwidth>
                     <TbTruckDelivery />
@@ -32,12 +38,7 @@ function AdminSideBar() {
                     &nbsp;&nbsp;Sản phẩm
                 </NeuButton>
             </Link>
-            <Link to='analytics' className={styles.sideOption}>
-                <NeuButton style={buttonStyle} rounded fullwidth>
-                    <TbChartLine />
-                    &nbsp;&nbsp;Tài chính
-                </NeuButton>
-            </Link>
+
             <Link to='chat' className={styles.sideOption}>
                 <NeuButton style={buttonStyle} rounded fullwidth>
                     <TbMessage2 />
