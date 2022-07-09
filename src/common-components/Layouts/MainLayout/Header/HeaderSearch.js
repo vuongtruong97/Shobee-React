@@ -55,7 +55,7 @@ function HeaderSearch() {
                     <div className={cx('cart-amount')}>{cart.totals}</div>
                 )}
                 <PopOver show={showCart} right>
-                    <HeaderCart data={cart.data} />
+                    {cart?.data && <HeaderCart data={cart.data} />}
                 </PopOver>
             </div>
         </div>

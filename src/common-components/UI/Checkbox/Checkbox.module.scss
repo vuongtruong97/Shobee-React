@@ -1,5 +1,6 @@
 .checkbox {
     display: inline-block;
+    font-size: 1.3rem !important;
     label {
         width: 2rem;
         height: 2rem;
@@ -7,6 +8,7 @@
         border: 1px solid var(--primary);
         border-radius: 50%;
         display: block;
+        overflow: hidden;
     }
     input {
         display: none;

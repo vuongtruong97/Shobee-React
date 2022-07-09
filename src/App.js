@@ -24,6 +24,7 @@ const Blog = React.lazy(() => import('./pages/Blog/Blog'))
 const Home = React.lazy(() => import('./pages/Home/Home'))
 const User = React.lazy(() => import('./pages/User/User'))
 const Category = React.lazy(() => import('./pages/Category/Category'))
+const Cart = React.lazy(() => import('./pages/Cart/Cart'))
 
 const RegisterShop = React.lazy(() => import('./pages/Shop/RegisterShop'))
 const ShopAnalystics = React.lazy(() =>
@@ -32,6 +33,8 @@ const ShopAnalystics = React.lazy(() =>
 const ManageProducts = React.lazy(() =>
     import('./pages/Shop/ManageProducts/ManageProducts')
 )
+
+const Chat = React.lazy(() => import('./pages/Shop/Chat/Chat'))
 
 const AuthPage = React.lazy(() => import('./pages/Auth/AuthPage'))
 
@@ -74,6 +77,10 @@ function App() {
                         </Route>
 
                         <Route element={<RequireAuth />}>
+                            <Route path='cart' element={<Cart />} />
+                        </Route>
+
+                        <Route element={<RequireAuth />}>
                             <Route path='user' element={<User />}>
                                 <Route path='profile' element={<h1>Profile</h1>} />
                             </Route>
@@ -97,6 +104,7 @@ function App() {
                         <Route path='shop-manage/*' element={<AdminLayout />}>
                             <Route index element={<ShopAnalystics />} />
                             <Route path='products' element={<ManageProducts />} />
+                            <Route path='chat' element={<Chat />} />
                         </Route>
                     </Route>
 

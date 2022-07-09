@@ -12,8 +12,6 @@ import numberWithCommas from 'utils/numberWithCommas'
 
 import { FaSortAmountDown, FaSortAmountUp, FaEdit, FaTrash } from 'react-icons/fa'
 
-const rootURL = process.env.REACT_APP_BASE_URL
-
 function ProductsTable({ products, ...props }) {
     const [showConfirmDelele, setShowConfirmDelele] = React.useState(false)
     const [showUpdateProd, setShowUpdateProd] = React.useState(false)
