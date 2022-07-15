@@ -7,36 +7,32 @@
         font-size: 1.8rem;
     }
     .select {
+        border: 1px solid #ccc;
         height: 3.7rem;
         line-height: 4rem;
         font-size: 1.6rem;
         padding: 0 1.5rem;
         font-family: inherit;
-        border: none;
-        border-radius: 999px;
         background-color: transparent;
-        box-shadow: 2px 2px 5px #b3b3b3, -2px -2px 3px #fff;
         cursor: pointer;
         color: var(--text-secondary);
         font-weight: 500;
-        -webkit-appearance: none;
-        -moz-appearance: none;
         &:focus {
             outline: none;
-        }
-        &::-ms-expand {
-            display: none;
         }
         option {
             color: var(--primary);
         }
+        &.error {
+            border: 1px solid var(--error);
+            background-color: var(--error-bg);
+        }
     }
-    .arrow {
-        position: absolute;
-        top: 55%;
-        font-size: 2rem;
-        right: 1.5rem;
-        transform: translateY(-50%);
-        color: var(--text-secondary);
+    .error_message {
+        display: block;
+        margin-top: 0.5rem;
+        margin-left: 0.5rem;
+        font-size: 1.3rem;
+        color: var(--error);
     }
 }

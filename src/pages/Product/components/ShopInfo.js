@@ -56,7 +56,7 @@ function ShopInfo({ shopinfo }) {
                             </div>
                             <div className={styles.contact}>
                                 <div className={styles.contact_key}>Địa chỉ:</div>
-                                <div>{shopinfo.shop_contacts.address[0]}</div>
+                                <div>{shopinfo.shop_contacts.address[0].province}</div>
                             </div>
                         </address>
                     </div>

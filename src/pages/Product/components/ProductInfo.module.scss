@@ -1,11 +1,10 @@
 .show {
     flex: 4;
-    .slider {
-        background-size: cover;
-        background-position: center;
-        padding-top: 100%;
-    }
     .share {
+        padding: 1rem;
+        & > * {
+            margin-left: 0.5rem;
+        }
     }
 }
 
@@ -33,6 +32,8 @@
     .reputation {
         display: flex;
         font-size: 1.6rem;
+        padding: 1rem;
+
         & > *:not(:first-child) {
             border-left: 1px solid #ccc;
             padding: 0 1rem;
@@ -42,6 +43,8 @@
         display: flex;
         align-items: center;
         font-size: 3rem;
+        background-color: #f4f4f4;
+        padding: 1rem;
         & > *:not(:first-child) {
             margin-left: 1rem;
         }
@@ -58,10 +61,20 @@
             .optionTitle {
                 font-size: 1.6rem;
                 color: var(--text-secondary-o);
+                display: flex;
+                width: 100%;
+                .title_name {
+                    padding: 1rem;
+                    flex: 20%;
+                }
+                .title_detail {
+                    padding: 1rem;
+                    flex: 80%;
+                }
             }
             .quantityCrtl {
                 border: 1px solid #ccc;
-                margin-left: 1rem;
+                width: fit-content;
                 .quantityCtrlBtn {
                     width: 3rem;
                     height: 3rem;
@@ -95,4 +108,26 @@
     }
     .policy {
     }
+}
+
+@media (min-width: 1200px) {
+    // .title_name {
+    //     padding: 1rem;
+    //     flex: 50% !important;
+    // }
+    // .title_detail {
+    //     padding: 1rem;
+    //     flex: 50% !important;
+    // }
+}
+
+@media (min-width: 768px) {
+    // .title_name {
+    //     padding: 1rem;
+    //     flex: 50% !important;
+    // }
+    // .title_detail {
+    //     padding: 1rem;
+    //     flex: 50% !important;
+    // }
 }

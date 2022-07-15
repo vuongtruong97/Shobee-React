@@ -23,7 +23,7 @@ function ProductItem({ data }) {
                 <div
                     ref={bgcImage}
                     style={{
-                        backgroundImage: isOnScreen ? `url(${data.image_url})` : null,
+                        backgroundImage: isOnScreen ? `url(${data.image_urls[0]})` : null,
                     }}
                     className={styles.image}
                 ></div>

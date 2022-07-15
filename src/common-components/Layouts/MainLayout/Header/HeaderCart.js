@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import numberWithCommas from 'utils/numberWithCommas'
 
 function HeaderCart({ data }) {
+    console.log('re-render')
     return (
         <div className={styles.cart}>
             <div className={styles.cart_title}>Giỏ hàng của bạn</div>
@@ -18,7 +19,10 @@ function HeaderCart({ data }) {
                         <div
                             className={styles.image}
                             style={{
-                                backgroundImage: `url(${prod.product_id.image_url})`,
+                                backgroundImage: `url(${
+                                    prod.product_id.image_urls &&
+                                    prod.product_id.image_urls[0]
+                                })`,
                             }}
                         ></div>
                         <div className={styles.name}>{prod.product_id.name}</div>

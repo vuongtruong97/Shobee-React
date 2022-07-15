@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .checkbox {
     display: inline-block;
     font-size: 1.3rem !important;
@@ -25,3 +26,32 @@
         }
     }
 }
+=======
+.checkbox {
+    display: inline-block;
+    font-size: 1.3rem !important;
+    label {
+        width: 2rem;
+        height: 2rem;
+        background-color: rgb(255, 255, 255);
+        border: 1px solid var(--primary);
+        border-radius: 50%;
+        display: block;
+        overflow: hidden;
+    }
+    input {
+        display: none;
+        &:checked + label {
+            background: var(--primary);
+            background: var(--primary-gradient);
+            &::before {
+                content: '✔';
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                color: #fff;
+            }
+        }
+    }
+}
+>>>>>>> 08311cd13073a4a2c5c27195e5a1a692c8df7a62

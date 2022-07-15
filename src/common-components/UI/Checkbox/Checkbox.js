@@ -1,14 +1,13 @@
 import React from 'react'
 import styles from './Checkbox.module.scss'
 
-function Checkbox({ ...props }) {
-    const id = Math.random()
+function Checkbox({ id = Math.random(), ...props }, ref) {
     return (
         <div className={styles.checkbox}>
-            <input id={id} type='checkbox' />
+            <input ref={ref} {...props} id={id} type='checkbox' />
             <label htmlFor={id}></label>
         </div>
     )
 }
 
-export default Checkbox
+export default React.forwardRef(Checkbox)

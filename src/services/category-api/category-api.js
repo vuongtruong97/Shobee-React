@@ -2,23 +2,9 @@ import axiosClient from '../axiosClient'
 import CATE_API from './api-url'
 
 const categoryApi = {
-    getCategories() {
-        return axiosClient({
-            url: CATE_API.GET_LIST,
-            method: 'POST',
-            body: JSON.stringify({
-                filter: {
-                    name: '',
-                },
-                sort: {
-                    createdAt: 1,
-                },
-                paging: {
-                    start: 0,
-                    limit: 30,
-                },
-            }),
-        })
+    getCategories(params) {
+        const url = CATE_API.GET_LIST
+        return axiosClient.get(url, { params: params })
     },
     getProdOfCate(slug, params) {
         const url = CATE_API.GET_PROD_OF_CATE.replace(':slug', slug)

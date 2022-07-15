@@ -4,6 +4,7 @@ import styles from './ManageProducts.module.scss'
 import SearchProduct from '../components/SearchProduct/SearchProduct'
 import ProductsTable from '../components/ProductsTable/ProductsTable'
 import shopAPI from 'services/shop-api/shop-api'
+import { Outlet } from 'react-router-dom'
 
 function ManageProducts() {
     const [shopProducts, setShopProducts] = useState([])
@@ -23,7 +24,7 @@ function ManageProducts() {
     return (
         <div className={styles.products_pages}>
             <SearchProduct onCreate={handleRefreshPage} />
-            <ProductsTable products={shopProducts} />
+            <Outlet />
         </div>
     )
 }

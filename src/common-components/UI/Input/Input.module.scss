@@ -5,7 +5,8 @@
     }
     .input-wrap {
         border: 1px solid #ccc;
-        input {
+        input,
+        textarea {
             height: 3.5rem;
             line-height: 4rem;
             font-size: 1.6rem;
@@ -20,9 +21,18 @@
                 border-radius: 999px;
             }
         }
+        textarea {
+            resize: none;
+            height: 40rem;
+            &:focus {
+                outline: none;
+            }
+        }
+
         &.error {
             border: 1px solid var(--error);
-            input {
+            input,
+            textarea {
                 background-color: var(--error-bg);
             }
         }

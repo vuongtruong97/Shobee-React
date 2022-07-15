@@ -10,7 +10,7 @@ function CategorySliderItem({ slug, image_url, ...props }) {
                     {...props}
                     className={styles['category-thumb']}
                     style={{
-                        backgroundImage: `url(https://shopeebe.herokuapp.com/${image_url})`,
+                        backgroundImage: `url(${image_url})`,
                     }}
                 ></div>
                 <p className={styles['category-name']}>{props.name}</p>

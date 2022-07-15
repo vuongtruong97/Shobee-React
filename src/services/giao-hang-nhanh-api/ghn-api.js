@@ -1,30 +1,29 @@
 import axiosClient from 'services/axiosClient'
+import axios from 'axios'
 import GHN_API from './api-url'
 
-const productAPI = {
-    createProduct(newProduct) {
-        const url = GHN_API.CREATE_PRODUCT
-        const config = {
-            headers: { 'content-type': 'multipart/form-data' },
-        }
-        return axiosClient.post(url, newProduct, config)
-    },
-    getProduct(id) {
-        const url = GHN_API.GET_PRODUCT.replace(':id', id)
-        return axiosClient.get(url)
-    },
-    updateProduct(id, newData) {
-        const url = GHN_API.UPDATE_PRODUCT.replace(':id', id)
-        return axiosClient.post(url, newData)
-    },
-    deleteProduct(id) {
-        const url = GHN_API.DELETE_PRODUCT.replace(':id', id)
-        return axiosClient.delete(url)
-    },
-    getListProd(params) {
-        const url = GHN_API.GET_LIST
-        return axiosClient.get(url, { params: params })
+const config = {
+    headers: {
+        'Content-Type': 'application/json',
+        Token: process.env.REACT_APP_GHN_TOKEN,
     },
 }
 
-export default productAPI
+const giaoHangNhanhAPI = {
+    getProvince() {
+        const url = GHN_API.GET_PROVINCE
+        return axios.get(url, config)
+    },
+    getDistrict(id) {
+        console.log(id)
+        const url = `${GHN_API.GET_DISTRICT}?province_id=${id}`
+        console.log(url)
+        return axios.get(url, config)
+    },
+    getWard(id) {
+        const url = `${GHN_API.GET_WARD}?district_id=${id}`
+        return axios.get(url, config)
+    },
+}
+
+export default giaoHangNhanhAPI

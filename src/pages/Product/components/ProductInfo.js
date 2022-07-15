@@ -12,9 +12,23 @@ import { useDispatch } from 'react-redux'
 
 import numberWithCommas from 'utils/numberWithCommas'
 import { userActions } from 'store/userSlice/userSlice'
+import ProductSlider from './ProductSlider'
+import {
+    FacebookShareButton,
+    FacebookIcon,
+    FacebookMessengerIcon,
+    FacebookMessengerShareButton,
+    TwitterShareButton,
+    TwitterIcon,
+    PinterestShareButton,
+    PinterestIcon,
+} from 'react-share'
+
 function ProductInfo({ product }) {
     let [quantity, setQuantity] = useState(0)
     const dispatch = useDispatch()
+
+    console.log(product)
 
     const handleIncrQuantity = () => {
         console.log(quantity)
@@ -55,14 +69,30 @@ function ProductInfo({ product }) {
         <WrapStyle>
             <div className='col col-12 sm-6 md-5 lg-4 xl-4'>
                 <div className={styles.show}>
-                    <div
-                        style={{ backgroundImage: `url(${product.image_url})` }}
-                        className={styles.slider}
-                    ></div>
+                    <ProductSlider image_urls={product.image_urls} />
                     <div className={styles.share}>
-                        <span>GOOGLE</span>
-                        <span>FACEBOOK</span>
-                        <span>INTSGRAM</span>
+                        <FacebookShareButton
+                            url={window.location.href}
+                            quote='vuong dep trai'
+                            hashtag='shobee'
+                        >
+                            <FacebookIcon size={32} round={true} />
+                        </FacebookShareButton>
+                        <PinterestShareButton
+                            url={window.location.href}
+                            media={product.image_urls && product.image_urls[0]}
+                        >
+                            <PinterestIcon size={32} round={true} />
+                        </PinterestShareButton>
+                        <FacebookMessengerShareButton
+                            appId='310952877774062'
+                            url={window.location.href}
+                        >
+                            <FacebookMessengerIcon size={32} round={true} />
+                        </FacebookMessengerShareButton>
+                        <TwitterShareButton url={window.location.href}>
+                            <TwitterIcon size={32} round={true} />
+                        </TwitterShareButton>
                     </div>
                 </div>
             </div>
@@ -99,16 +129,16 @@ function ProductInfo({ product }) {
                         )}
                         {product?.discount && (
                             <span style={{ color: 'var(--primary)' }}>
+                                ₫
                                 {numberWithCommas(
                                     (product.price / 100) *
                                         Math.floor(Math.random() * 100)
                                 )}
-                                Đ
                             </span>
                         )}
                         {!product?.discount && (
                             <span style={{ color: 'var(--primary)' }}>
-                                {numberWithCommas(+product.price)}Đ
+                                {numberWithCommas(+product.price)}&nbsp;₫
                             </span>
                         )}
                         {product?.discount && <Tag>{product.discount}% Giảm</Tag>}
@@ -116,36 +146,44 @@ function ProductInfo({ product }) {
                     <div className={styles.options}>
                         <div className={styles.option}>
                             <span className={styles.optionTitle}>
-                                Mã giảm giá: Không có
+                                <span className={styles.title_name}>Mã giảm giá</span>
+                                <span className={styles.title_detail}> Không có</span>
                             </span>
                         </div>
                         <div className={styles.option}>
-                            <span className={styles.optionTitle}>Số lượng: </span>
-                            <div className={styles.quantityCrtl}>
-                                <button
-                                    className={styles.quantityCtrlBtn}
-                                    onClick={handleDcrQuantity}
-                                >
-                                    -
-                                </button>
-                                <input
-                                    className={styles.quantityInput}
-                                    value={quantity}
-                                    type='number'
-                                    max={product.quantity}
-                                    onChange={handleSetQuantity}
-                                />
-                                <button
-                                    className={styles.quantityCtrlBtn}
-                                    onClick={handleIncrQuantity}
-                                >
-                                    +
-                                </button>
-                            </div>
+                            <span className={styles.optionTitle}>
+                                <span className={styles.title_name}> Số lượng</span>
+                                <span className={styles.title_detail}>
+                                    <div className={styles.quantityCrtl}>
+                                        <button
+                                            className={styles.quantityCtrlBtn}
+                                            onClick={handleDcrQuantity}
+                                        >
+                                            -
+                                        </button>
+                                        <input
+                                            className={styles.quantityInput}
+                                            value={quantity}
+                                            type='number'
+                                            max={product.quantity}
+                                            onChange={handleSetQuantity}
+                                        />
+                                        <button
+                                            className={styles.quantityCtrlBtn}
+                                            onClick={handleIncrQuantity}
+                                        >
+                                            +
+                                        </button>
+                                    </div>
+                                </span>
+                            </span>
                         </div>
                         <div className={styles.option}>
                             <span className={styles.optionTitle}>
-                                Kho hàng:<b> &nbsp;{product.quantity}</b>
+                                <span className={styles.title_name}>Kho hàng</span>
+                                <span className={styles.title_detail}>
+                                    <b> &nbsp;{product.quantity}</b>
+                                </span>
                             </span>
                         </div>
                     </div>

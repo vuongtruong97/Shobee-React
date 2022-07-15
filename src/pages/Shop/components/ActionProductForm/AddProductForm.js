@@ -96,9 +96,9 @@ function AddProductForm({ onSuccess }) {
                 />
                 <NeuInput
                     rounded='true'
-                    {...register('price')}
                     type='number'
                     placeholder='Giá bán'
+                    {...register('price')}
                     error={errors.price?.message}
                 />
             </div>
@@ -109,6 +109,8 @@ function AddProductForm({ onSuccess }) {
                     {...register('category')}
                     listOption={listCate}
                     error={errors.category?.message}
+                    valueField='_id'
+                    valueName='display_name'
                 />
                 <Select
                     {...register('brands')}
@@ -155,6 +157,8 @@ function AddProductForm({ onSuccess }) {
                         { _id: 'NEW', display_name: 'Mới' },
                         { _id: 'OLD', display_name: 'Cũ' },
                     ]}
+                    valueField='_id'
+                    valueName='display_name'
                 />
                 <NeuInput
                     rounded='true'
