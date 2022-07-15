@@ -18,7 +18,10 @@ function CategoriesSlider() {
                 setIsLoading(true)
                 const { data } = await categoryApi.getCategories()
                 setIsLoading(false)
-                setSliders(data.data)
+                console.log(data)
+                if (data.data) {
+                    setSliders(data.data)
+                }
             }
             if (sliders.length === 0) {
                 fetchData()
