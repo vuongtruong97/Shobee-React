@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .products_pages {
     display: flex;
     justify-content: center;
@@ -8,3 +9,15 @@
         margin-bottom: 2rem;
     }
 }
+=======
+.products_pages {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    & > * {
+        margin-bottom: 2rem;
+    }
+}
+>>>>>>> 08311cd13073a4a2c5c27195e5a1a692c8df7a62
