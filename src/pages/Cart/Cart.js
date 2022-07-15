@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import styles from './Cart.module.scss'
 import Checkbox from 'common-components/UI/Checkbox/Checkbox'
 import { Link } from 'react-router-dom'
@@ -8,16 +8,21 @@ import cartAPI from 'services/cart-api/cart-api'
 
 function Cart() {
     const [cart, setCart] = useState([])
+    const [orders, setOrders] = useState([])
 
     const fetchCartData = async () => {
         try {
             const res = await cartAPI.getCart()
-            console.log(res)
-            setCart(res.data.data.shop_order_ids)
+
+            if (res.data.data.shop_order_ids) {
+                setCart(res.data.data.shop_order_ids)
+            }
         } catch (error) {
             console.log(error)
         }
     }
+
+    // init cart data
     useEffect(() => {
         try {
             fetchCartData()
@@ -26,24 +31,121 @@ function Cart() {
         }
     }, [])
 
+    // modified cart and re-fetch cart data
     const modifiedQuantity = async (modified) => {
         try {
             const res = await cartAPI.modified(modified)
             console.log(res)
-            fetchCartData()
+            if (res.data.success) {
+                fetchCartData()
+            }
         } catch (error) {
             console.log(error)
         }
     }
+
+    // check shop select all
+    const handleCheckBoxAllShop = (shopId) => {
+        const shopInCart = cart.find((shop) => shop.shop_id._id === shopId)
+        const shopOrderIndex = orders.findIndex((shop) => shop.shopId === shopId)
+
+        // create list order from cart
+        const listOrder = shopInCart.product_briefs.map((prod) => {
+            return {
+                prodId: prod.product_id._id,
+                price: prod.product_id.price,
+                quantity: prod.quantity,
+            }
+        })
+        const shopOrder = {
+            shopId,
+            orders: listOrder,
+        }
+        // if not exist shop insert new shoporder to orders
+        if (shopOrderIndex === -1) {
+            orders.push(shopOrder)
+            return setOrders([...orders])
+        }
+        // if exist shop replace with full shop order
+        if (shopInCart.product_briefs.length > orders[shopOrderIndex].orders.length) {
+            orders.splice(shopOrderIndex, 1)
+            orders[shopOrderIndex] = shopOrder
+            return setOrders([...orders])
+        }
+        // if full shop order ==> remove out of orders
+        if (shopInCart.product_briefs.length === orders[shopOrderIndex].orders.length) {
+            orders.splice(shopOrderIndex, 1)
+            return setOrders([...orders])
+        }
+    }
+
+    // compute order
+    const handleCheckBoxProd = (data) => {
+        const shopIndex = orders.findIndex((order) => order.shopId === data.shopId)
+        //not exist shop
+        if (shopIndex === -1) {
+            orders.push({ shopId: data.shopId, orders: [data.prodInfo] })
+            return setOrders([...orders])
+        }
+        // exist shop
+        if (shopIndex !== -1) {
+            const prodIndex = orders[shopIndex].orders.findIndex(
+                (order) => order.prodId === data.prodInfo.prodId
+            )
+            //net exist prod
+            if (prodIndex === -1) {
+                orders[shopIndex].orders.push(data.prodInfo)
+            }
+            //exist prod
+            if (prodIndex !== -1) {
+                const newOrders = orders[shopIndex].orders.filter(
+                    (order) => order.prodId !== data.prodInfo.prodId
+                )
+                if (newOrders.length === 0) {
+                    // clear empty shop
+                    orders.splice(shopIndex, 1)
+                } else {
+                    orders[shopIndex].orders = newOrders
+                }
+            }
+            return setOrders([...orders])
+        }
+    }
+
+    const handleCheckedCheckBox = (shopId, prodId) => {
+        const shop = orders.find((shop) => shop.shopId === shopId)
+        if (!shop) return false
+        const exist = shop.orders.some((order) => order.prodId === prodId)
+        return !!exist
+    }
+
+    const handleCheckedCheckAllShop = (shopId) => {
+        const shopInCart = cart.find((shop) => shop.shop_id._id === shopId)
+        const shopInOrders = orders.find((shop) => shop.shopId === shopId)
+
+        if (!shopInOrders) return false
+
+        if (shopInCart.product_briefs.length === shopInOrders.orders.length) {
+            return true
+        }
+    }
+
     return (
         <div className='container' style={{ position: 'relative' }}>
             <div className={styles.cart}>
                 <div className={styles.shop_list}>
-                    {cart.map((shop) => (
+                    {cart.map((shop, i) => (
                         <div key={shop.shop_id._id} className={styles.shop}>
                             <div className={styles.head}>
                                 <div className={styles.checkbox}>
-                                    <Checkbox />
+                                    <Checkbox
+                                        checked={handleCheckedCheckAllShop(
+                                            shop.shop_id._id
+                                        )}
+                                        onChange={() => {
+                                            handleCheckBoxAllShop(shop.shop_id._id)
+                                        }}
+                                    />
                                 </div>
                                 <div className={styles.shop_name}>
                                     <AiFillShop /> &nbsp;
@@ -60,14 +162,33 @@ function Cart() {
                                         className={styles.prod}
                                     >
                                         <div className={styles.checkbox}>
-                                            <Checkbox />
+                                            <Checkbox
+                                                checked={handleCheckedCheckBox(
+                                                    shop.shop_id._id,
+                                                    prod.product_id._id
+                                                )}
+                                                id={prod.product_id._id}
+                                                onChange={() => {
+                                                    handleCheckBoxProd({
+                                                        shopId: shop.shop_id._id,
+                                                        prodInfo: {
+                                                            prodId: prod.product_id._id,
+                                                            quantity: prod.quantity,
+                                                            price: prod.product_id.price,
+                                                        },
+                                                    })
+                                                }}
+                                            />
                                         </div>
                                         <div className={styles.prod_info}>
                                             <Link to='#'>
                                                 <div
                                                     className={styles.prod_img}
                                                     style={{
-                                                        backgroundImage: `url(${prod.product_id.image_url})`,
+                                                        backgroundImage: `url(${
+                                                            prod.product_id.image_urls &&
+                                                            prod.product_id.image_urls[0]
+                                                        })`,
                                                     }}
                                                 ></div>
                                             </Link>
@@ -127,12 +248,14 @@ function Cart() {
                                             </div>
                                         </div>
                                         <div className={styles.total_price}>
-                                            {numberWithCommas(
-                                                prod.product_id.price * prod.quantity
-                                            )}
-                                            &nbsp;₫
+                                            <b>
+                                                {numberWithCommas(
+                                                    prod.product_id.price * prod.quantity
+                                                )}
+                                                &nbsp;₫
+                                            </b>
                                         </div>
-                                        <div className={styles.delete}>Delete</div>
+                                        <div className={styles.delete}>Xoá</div>
                                     </div>
                                 ))}
                             </div>

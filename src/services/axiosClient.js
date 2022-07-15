@@ -5,8 +5,10 @@ import queryString from 'query-string'
 import { TOKEN } from 'constants/browserStorage-constants'
 
 const axiosClient = axios.create({
-    baseURL: 'http://localhost:3001', //http://171.238.79.206:3000/home
+    //baseURL: 'https://api.snobdev.online/',
     //baseURL: process.env.REACT_APP_BASE_URL,
+    //baseURL: 'http://shobee.ddns.net:1998',
+    baseURL: 'https://shopeebe.herokuapp.com',
     withCredentials: false,
     headers: {
         // 'content-type': 'application/json',

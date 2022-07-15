@@ -1,24 +1,28 @@
 import React from 'react'
 import styles from './Select.module.scss'
-import { IoMdArrowDropdown } from 'react-icons/io'
 
-function Select({ label, listOption = [], listName, ...props }, ref) {
+import classNames from 'classnames/bind'
+
+const cx = classNames.bind(styles)
+
+function Select(
+    { label, listOption = [], listName, error, valueField, valueName, ...props },
+    ref
+) {
     return (
         <div className={styles.wrap}>
             <label>{label}</label>
-            <select className={styles.select} ref={ref} {...props}>
+            <select className={cx('select', { error: error })} ref={ref} {...props}>
                 <option disabled defaultValue hidden>
                     {listName}
                 </option>
-                {listOption.map((item) => (
-                    <option key={item._id} value={item._id}>
-                        {item.display_name}
+                {listOption.map((item, i) => (
+                    <option key={i} value={item[valueField]}>
+                        {item[valueName]}
                     </option>
                 ))}
             </select>
-            <div className={styles.arrow}>
-                <IoMdArrowDropdown />
-            </div>
+            {error && <span className={cx('error_message')}>{error}</span>}
         </div>
     )
 }

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import styles from './ProductsTable.module.scss'
 
 import DivStyle1 from 'common-components/UI/Div/DivStyle1'
@@ -11,11 +11,24 @@ import productAPI from 'services/product-api/product-api'
 import numberWithCommas from 'utils/numberWithCommas'
 
 import { FaSortAmountDown, FaSortAmountUp, FaEdit, FaTrash } from 'react-icons/fa'
+import NeuButton from 'common-components/UI/Button/NeuButton'
+import { Link } from 'react-router-dom'
+import shopAPI from 'services/shop-api/shop-api'
 
-function ProductsTable({ products, ...props }) {
-    const [showConfirmDelele, setShowConfirmDelele] = React.useState(false)
-    const [showUpdateProd, setShowUpdateProd] = React.useState(false)
-    const [prodInfo, setProdInfo] = React.useState({})
+function ProductsTable({ ...props }) {
+    const [showConfirmDelele, setShowConfirmDelele] = useState(false)
+    const [showUpdateProd, setShowUpdateProd] = useState(false)
+    const [prodInfo, setProdInfo] = useState({})
+    const [shopProducts, setShopProducts] = useState([])
+
+    const getListProd = async () => {
+        const res = await shopAPI.getMyShopProduct()
+        setShopProducts(res.data.data)
+    }
+
+    useEffect(() => {
+        getListProd()
+    }, [])
 
     const handleEditProduct = async (id) => {
         try {
@@ -51,6 +64,9 @@ function ProductsTable({ products, ...props }) {
             <DivStyle1>
                 <div className={styles.tableContainer}>
                     <h1 className={styles.title}>DANH SÁCH SẢN PHẨM</h1>
+                    <Link to='add' className={styles.actions}>
+                        <NeuButton primary>Thêm sản phẩm</NeuButton>
+                    </Link>
                     <table className={styles.table}>
                         <thead>
                             <tr className={styles.tr}>
@@ -104,7 +120,7 @@ function ProductsTable({ products, ...props }) {
                             </tr>
                         </thead>
                         <tbody>
-                            {products.map(
+                            {shopProducts.map(
                                 ({
                                     name,
                                     price,
@@ -112,7 +128,7 @@ function ProductsTable({ products, ...props }) {
                                     status,
                                     sold,
                                     _id,
-                                    image_url,
+                                    image_urls,
                                 }) => (
                                     <tr className={styles.tr} key={_id}>
                                         <td className={styles.td}>
@@ -123,8 +139,8 @@ function ProductsTable({ products, ...props }) {
                                                 className={styles.productImg}
                                                 alt='prod'
                                                 style={{
-                                                    backgroundImage: image_url
-                                                        ? `url(${image_url})`
+                                                    backgroundImage: image_urls
+                                                        ? `url(${image_urls[0]})`
                                                         : `url('https://cf.shopee.vn/file/46a2a2c810622f314d78455da5e5d926_xhdpi')`,
                                                 }}
                                             />

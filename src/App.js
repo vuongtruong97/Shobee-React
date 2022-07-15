@@ -33,6 +33,12 @@ const ShopAnalystics = React.lazy(() =>
 const ManageProducts = React.lazy(() =>
     import('./pages/Shop/ManageProducts/ManageProducts')
 )
+const ProductsTable = React.lazy(() =>
+    import('./pages/Shop/components/ProductsTable/ProductsTable')
+)
+const AddProduct = React.lazy(() =>
+    import('./pages/Shop/components/AddProduct/AddProduct')
+)
 
 const Chat = React.lazy(() => import('./pages/Shop/Chat/Chat'))
 
@@ -62,6 +68,7 @@ function App() {
         <>
             <Suspense fallback={<Loading />}>
                 <Routes>
+                    {/* User view */}
                     <Route path='/welcome' element={<Welcome />}>
                         <Route index path='new-user' element={<h2>Hello New User</h2>} />
                     </Route>
@@ -103,7 +110,10 @@ function App() {
                     <Route element={<RequireAuth />}>
                         <Route path='shop-manage/*' element={<AdminLayout />}>
                             <Route index element={<ShopAnalystics />} />
-                            <Route path='products' element={<ManageProducts />} />
+                            <Route path='products' element={<ManageProducts />}>
+                                <Route index element={<ProductsTable />} />
+                                <Route path='add' element={<AddProduct />} />
+                            </Route>
                             <Route path='chat' element={<Chat />} />
                         </Route>
                     </Route>

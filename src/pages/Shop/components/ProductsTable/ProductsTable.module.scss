@@ -1,6 +1,11 @@
 .tableContainer {
     padding: 4rem;
     width: 100%;
+    .actions {
+        display: block;
+        padding-bottom: 2rem;
+        float: right;
+    }
     .title {
         text-align: center;
         font-size: 26px;

@@ -18,6 +18,9 @@ export default function Chat() {
             if (err.message === 'invalid username') {
             }
         })
+        return () => {
+            socket.disconnect()
+        }
     }, [])
 
     console.log('Thông báo mới: ', nofi)
