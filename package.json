@@ -27,6 +27,8 @@
         "recharts": "^2.1.12",
         "sass": "^1.52.1",
         "slick-carousel": "^1.8.1",
+        "socket.io-client": "^4.5.1",
+        "styled-components": "^5.3.5",
         "web-vitals": "^2.1.4",
         "yup": "^0.32.11"
     },

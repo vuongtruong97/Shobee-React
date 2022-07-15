@@ -60,13 +60,13 @@ const data = [
 
 function ShopAnalystics() {
     return (
-        <div style={{ padding: '8rem 2rem 0' }}>
+        <>
             <DivStyle1>
                 <div className={styles.todo}>
                     <h2 className={styles.title}>Danh sách cần làm</h2>
                     <div className='row'>
                         <div className='col col-6 lg-3' style={{ marginBottom: '1rem' }}>
-                            <DivStyle2 style={{ padding: '1rem', height: '100%' }}>
+                            <DivStyle2 hover style={{ padding: '1rem', height: '100%' }}>
                                 <Link to='#'>
                                     <div className={styles.todoInfo}>
                                         <b>23</b>
@@ -76,7 +76,7 @@ function ShopAnalystics() {
                             </DivStyle2>
                         </div>
                         <div className='col col-6 lg-3' style={{ marginBottom: '1rem' }}>
-                            <DivStyle2 style={{ padding: '1rem', height: '100%' }}>
+                            <DivStyle2 hover style={{ padding: '1rem', height: '100%' }}>
                                 <Link to='#'>
                                     <div className={styles.todoInfo}>
                                         <b>23</b>
@@ -86,7 +86,7 @@ function ShopAnalystics() {
                             </DivStyle2>
                         </div>
                         <div className='col col-6 lg-3' style={{ marginBottom: '1rem' }}>
-                            <DivStyle2 style={{ padding: '1rem', height: '100%' }}>
+                            <DivStyle2 hover style={{ padding: '1rem', height: '100%' }}>
                                 <Link to='#'>
                                     <div className={styles.todoInfo}>
                                         <b>0</b>
@@ -98,7 +98,7 @@ function ShopAnalystics() {
                             </DivStyle2>
                         </div>
                         <div className='col col-6 lg-3' style={{ marginBottom: '1rem' }}>
-                            <DivStyle2 style={{ padding: '1rem', height: '100%' }}>
+                            <DivStyle2 hover style={{ padding: '1rem', height: '100%' }}>
                                 <Link to='#'>
                                     <div className={styles.todoInfo}>
                                         <b>2</b>
@@ -176,7 +176,7 @@ function ShopAnalystics() {
                     </div>
                 </div>
             </DivStyle1>
-        </div>
+        </>
     )
 }
 

@@ -10,9 +10,13 @@ function AdminLayout() {
         <>
             <AdminHeader />
             <div className={styles.wrap}>
-                <AdminSideBar />
-                <div style={{ marginLeft: '22rem' }}>
-                    <Outlet />
+                <div className='row'>
+                    <div className='col col-2 lg-1'>
+                        <AdminSideBar />
+                    </div>
+                    <div className='col col-10 lg-11' style={{ padding: '0 3rem' }}>
+                        <Outlet />
+                    </div>
                 </div>
             </div>
         </>

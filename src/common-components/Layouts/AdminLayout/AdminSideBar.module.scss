@@ -1,21 +1,30 @@
 .sideBar {
+    padding: 0 2rem;
     position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    width: 22rem;
-    padding: 7rem 1rem 0;
-    margin-top: 8rem;
-    border-top-right-radius: 5rem;
-    background-color: #e3e3e3;
-    box-shadow: 0.3rem 0.3rem 0.6rem #c9c9c9, -0.2rem -0.2rem 0.5rem #fff;
     & > * {
         margin-bottom: 2rem;
         display: block;
     }
     .sideOption {
-        padding: 0 1rem;
         transition: linear 0.25s;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.3rem;
+        // background-color: #85858533;
+        height: 8rem;
+        width: 8rem;
+        text-align: center;
+        font-weight: 500;
+        border-radius: 1rem;
+        line-height: 1.7;
+        box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
+            rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+        color: var(--text-primary);
+        & > svg {
+            font-size: 2rem;
+        }
         &:hover {
             transform: translateX(0.5rem);
         }
